@@ -5,6 +5,14 @@ C       Computes the Mie scattering properties for a single homogeneous
 C     sphere of radius RADIUS.  The six phase matrix elements times the 
 C     scattering coefficient is returned as Wigner d-function series 
 C     coefficients.
+C     
+C     # Adding intention directives for f2py
+CF2PY INTENT(IN) :: WAVELENGTH, MINDEX, RADIUS, MAXRANK
+CF2PY INTENT(OUT) :: EXTINCTION, SCATTER, NRANK, WIGCOEF
+CF2PY INTENT(HIDE) :: MAXN
+CF2PY REAL WIGCOEF(6, 0:MAXN)
+
+
       IMPLICIT NONE
       INTEGER     MAXRANK, NRANK
       REAL        WAVELENGTH, RADIUS
@@ -106,6 +114,8 @@ C      given the dimensionless size parameter X and the complex
 C      index of refraction (Mre,Mim).  The number of terms calculated
 C      is given by NTERMS unless NTERMS <= 0 or in which case the
 C      appropriate number is calculated and returned in NTERMS.
+
+CF2PY INTENT(IN) :: NTERMS,      
       IMPLICIT NONE
       INTEGER   NTERMS
       DOUBLE PRECISION  X
