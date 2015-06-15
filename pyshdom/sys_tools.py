@@ -24,7 +24,7 @@ import os
 from contextlib import contextmanager
 
 # Get path to the SHDOM source code
-PATH_REL_SHDOM = os.path.join('..', '..', 'shdom')     # relative path from examples
+PATH_REL_SHDOM = os.path.join('..', 'shdom')     # relative path from examples
 PATH_ABS_SHDOM = os.path.abspath(PATH_REL_SHDOM)
 
 # Define a function to add the source directory to the pythonpath
