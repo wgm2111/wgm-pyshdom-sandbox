@@ -35,7 +35,7 @@ import shutil
 # ================================================================
 
 NAME = "pyshdom"
-VERSION = '0.0.1'
+VERSION = '0.0.1.dev1'
 DESCRIPTION = (
     "Pre-development work on Python wrappers for SHDOM.")
 AUTHOR = "William G.K. Martin"
@@ -85,7 +85,7 @@ ext_modules = [
 # =====================================================================
 
 def make_shdom(src_path=SHDOM_MOD_SOURCE_DIR, 
-               script_dir=TARGET_PROPGEN_DIR, 
+               propgen_bin_dir=TARGET_PROPGEN_BIN, 
                shdom_execs=SHDOM_PROPGEN_EXECS):
     """
     Run make the FORTRAN programs that will be called directly. This is 
@@ -94,7 +94,7 @@ def make_shdom(src_path=SHDOM_MOD_SOURCE_DIR,
     
     # Get the absolute path to 
     shdom_dir = os.path.abspath(src_path)
-    script_dir = os.path.abspath(script_dir)
+    propgen_bin_dir = os.path.abspath(propgen_bin_dir)
 
     # Change directory to the current working directory
     current_path = os.getcwd()
@@ -107,7 +107,7 @@ def make_shdom(src_path=SHDOM_MOD_SOURCE_DIR,
     for name in shdom_execs:#('propgen', 'make_mie_table'):
         os.system('make {exe}'.format(exe=name))
         src_path = os.path.join(shdom_dir, name+ext)
-        dst_path = os.path.join(script_dir, name+ext)
+        dst_path = os.path.join(propgen_bin_dir, name+ext)
         shutil.copyfile(src_path, dst_path)
        
         # Change permissions to make the programs executable
