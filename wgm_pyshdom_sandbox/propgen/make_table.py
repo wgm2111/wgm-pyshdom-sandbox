@@ -27,10 +27,12 @@ from subprocess import Popen, PIPE, STDOUT
 # from sys_tools import PATH_ABS_SHDOM, get_abs_path, script_switch
 
 
-# Define a folder to use for storing files 
-DATA_FOLDER = "data"
-BIN_FOLDER = os.path.abspath('bin')
 
+
+# Define a folder to use for storing files
+DIR = os.path.dirname(__file__)
+DATA_FOLDER = os.path.join(DIR, "data")
+BIN_FOLDER = os.path.join(DIR, "bin")
 
 # Make mie table interface
 # --
@@ -129,7 +131,7 @@ def make_mie_table(poltab, wavelen1, wavelen2,
         # ============
         
         # get absolute path
-        program_path = os.path.join('bin', "make_mie_table") # get absolute path
+        program_path = os.path.join(BIN_FOLDER, "make_mie_table") # get absolute path
         
         # Call the program with an open pipe and quited output
         p = Popen(program_path, stdin=PIPE, stdout=open(os.devnull, 'wb'))
@@ -137,8 +139,7 @@ def make_mie_table(poltab, wavelen1, wavelen2,
         # Pass use input via the open pipe
         p.communicate(make_mie_table_input)
         p.wait()                    # wait for the process to finish
-    
-    
+     
     
     else:                   # if aerosol calculations are needed . . . 
         msg = "Add aerosol suport to make_mie_table."
@@ -148,7 +149,6 @@ def make_mie_table(poltab, wavelen1, wavelen2,
 # Some convenience routines
 def makeMieWaterGamma(fname, wavlen, reffmin, reffmax, reffnum, 
                       alpha=7.0,       # shape parameter estimate [Evans propgen.txt]
-                      pardens=0.99997, # liquid water density [Google]
                       reff_cutoff=None, logspacing=True, polarized=True, 
                       overwrite=False,
                       make_mie_table=make_mie_table):
@@ -176,7 +176,8 @@ def makeMieWaterGamma(fname, wavlen, reffmin, reffmax, reffnum,
     reffmin - minimum effective radius available in the table
     reffmax - maximum effective radius available in the table
     reffnum - number of effective radii in between
-    
+    alpha=7 - shape parameter for Gamma distribution 
+
     ## output
     fname   - returns the filename of the table (may have a extra .part)
 
@@ -192,10 +193,12 @@ def makeMieWaterGamma(fname, wavlen, reffmin, reffmax, reffnum,
         reff_cutoff = reffmax + 3 * effective_variance
 
     # Make the call to make_mie_table
-    make_mie_table(polarized, wavlen, wavlen, 'W', 'C', 0.0, 0.0, pardens, 
+    make_mie_table(polarized, wavlen, wavlen, 'W', 'C', 0.0, 0.0, 1.0, 
                    'G', alpha, 0.1, reffnum, reffmin, reffmax, logspacing,
                    reff_cutoff, fname, overwrite=overwrite)
 
     # Return the filename
     return fname
+
+
 
