@@ -101,8 +101,8 @@ if __name__ == "__main__":
         ix = np.arange(X.size) + 1
         iy = np.arange(Y.size) + 1
         iz = np.arange(Z.size) + 1
-        ixx, iyy, izz = np.array(np.meshgrid(ix, iy, iz))
-        xx, yy, zz = np.array(np.meshgrid(X, Y, Z))
+        ixx, iyy, izz = np.array(np.meshgrid(ix, iy, iz, indexing='ij'))
+        xx, yy, zz = np.array(np.meshgrid(X, Y, Z, indexing='ij'))
         
         mass = cloudmass(xx, yy, zz)
         reff = cloudreff(xx, yy, zz)

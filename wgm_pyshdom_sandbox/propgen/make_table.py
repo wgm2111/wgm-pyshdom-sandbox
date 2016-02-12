@@ -28,7 +28,6 @@ from subprocess import Popen, PIPE, STDOUT
 
 
 
-
 # Define a folder to use for storing files
 DIR = os.path.dirname(__file__)
 DATA_FOLDER = os.path.join(DIR, "data")
@@ -131,7 +130,7 @@ def make_mie_table(poltab, wavelen1, wavelen2,
         # ============
         
         # get absolute path
-        program_path = os.path.join(BIN_FOLDER, "make_mie_table") # get absolute path
+        program_path = os.path.join(BIN_FOLDER, "make_mie_table")
         
         # Call the program with an open pipe and quited output
         p = Popen(program_path, stdin=PIPE, stdout=open(os.devnull, 'wb'))
@@ -148,7 +147,7 @@ def make_mie_table(poltab, wavelen1, wavelen2,
 
 # Some convenience routines
 def makeMieWaterGamma(fname, wavlen, reffmin, reffmax, reffnum, 
-                      alpha=7.0,       # shape parameter estimate [Evans propgen.txt]
+                      alpha=7.0,  # shape parameter estimate [Evans propgen.txt]
                       reff_cutoff=None, logspacing=True, polarized=True, 
                       overwrite=False,
                       make_mie_table=make_mie_table):

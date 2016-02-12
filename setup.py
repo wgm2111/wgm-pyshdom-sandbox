@@ -57,7 +57,7 @@ FORTRAN_SOURCE_DIR = 'src'         # Other Fortran sources
 
 # List of propgen scripts to make
 TARGET_PROPGEN_DIR = join(PYTHON_SOURCE_DIR, 'propgen')
-TARGET_PROPGEN_BIN = join(PYTHON_SOURCE_DIR, 'propgen','bin')
+TARGET_PROPGEN_BIN = join(PYTHON_SOURCE_DIR, 'propgen', 'bin')
 SHDOM_PROPGEN_EXECS = [
     'propgen', 'make_mie_table', 'make_tmatrix_table', 'plotscattab']
 
